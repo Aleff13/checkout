@@ -109,11 +109,12 @@ export default function CheckboxList() {
                                         tabIndex={-1}
                                         disableRipple
                                         inputProps={{ 'aria-labelledby': labelId }}
+                                        data-testid={`checkbox-${name}`}
                                     />
                                 </ListItemIcon>
-                                <ListItemText sx={{ color: 'black' }} id={labelId} primary={name} />
+                                <ListItemText sx={{ color: 'black' }} id={labelId} primary={name} data-testid={`name-${name}`} />
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <ListItemText sx={{ color: 'black' }} id={labelId} primary={USDollar.format(price)} />
+                                    <ListItemText sx={{ color: 'black' }} id={labelId} primary={USDollar.format(price)} data-testid={`price-${price}`} />
                                 </div>
                             </ListItemButton>
                         </ListItem>
@@ -125,16 +126,16 @@ export default function CheckboxList() {
                 Payment
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
-                <TextField id="outlined-cardNumber" label="Card number" variant="outlined" sx={{ margin: "2px" }} value={number} onChange={(val) => setNumber(val.target.value)} />
-                <TextField id="outlined-cvv" label="cvv" variant="outlined" sx={{ margin: "2px" }} value={cvv} onChange={(val) => setCVV(val.target.value)} />
-                <TextField id="outlined-date" type="date" sx={{ margin: "2px" }} value={date} onChange={(val) => setDate(val.target.value)} />
+                <TextField id="outlined-cardNumber" label="Card number" variant="outlined" sx={{ margin: "2px" }} value={number} onChange={(val) => setNumber(val.target.value)} data-testid='card-number' />
+                <TextField id="outlined-cvv" label="cvv" variant="outlined" sx={{ margin: "2px" }} value={cvv} onChange={(val) => setCVV(val.target.value)} data-testid='cvv' />
+                <TextField id="outlined-date" type="date" sx={{ margin: "2px" }} value={date} onChange={(val) => setDate(val.target.value)} data-testid="date" />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
-                <Typography variant="h5" component="h6">
+                <Typography variant="h5" component="h6" data-testid='total-value' >
                     Total: {USDollar.format(priceSum)}
                 </Typography>
-                <Button variant="contained" disabled={!isValid} onClick={() => isValidPayment()}>Finish</Button>
+                <Button variant="contained" disabled={!isValid} onClick={() => isValidPayment()} data-testid='finish-button'>Finish</Button>
             </Box>
-        </Paper >
+        </Paper>
     );
 }
